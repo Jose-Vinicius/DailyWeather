@@ -1,10 +1,12 @@
 import React from "react";
+import { AppProvider } from "./context/appContext";
+import { DesktopView } from "./pages/desktop";
+import './scss/reset.scss'
 
-function App() {
-
+export function App() {
   return (
-    <h1>Hello world</h1>
+    <AppProvider>
+      <DesktopView />
+    </AppProvider>
   )
 }
-
-export default App
