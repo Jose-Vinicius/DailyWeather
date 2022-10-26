@@ -1,5 +1,5 @@
 import React from "react";
-import { AppProvider } from "./context/appContext";
+import { AppProvider } from "./context/AppContext";
 import { DesktopView } from "./pages/desktop";
 import './scss/reset.scss'
 
