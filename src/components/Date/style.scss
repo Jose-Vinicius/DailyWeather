@@ -1,0 +1,14 @@
+@import '../../scss/variables.scss';
+
+.date--field{
+    width: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    p{
+        @include font(600, 6.4rem);
+    }
+    span{
+        @include font(300, 4.6rem)
+    }
+}
