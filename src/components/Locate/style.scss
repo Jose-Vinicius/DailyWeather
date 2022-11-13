@@ -1,15 +1,26 @@
 @import '../../scss/variables.scss';
 
-.locate--field{
+.locate{
     display: flex;
-    width: 500px;
+    flex-direction: row;
+    align-items: center;
     span{
-        @include font(600, 8.8rem);
+        @include font(600,5.8em);
         color:white;
     }
     p{
-        @include font(300, 4.6rem);
+        @include font(300, 4.6em);
         color: white;
-        margin:30px 0 0 20px;
+        padding: 15px 0 0 15px;
+    }
+   &--field{
+        display: flex;
+        width: 800px;
+        justify-content: space-between;
+        margin: 20px 40px;
+    
+        button{
+            font-size: 3.5em;
+        }
     }
 }

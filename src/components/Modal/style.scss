@@ -1,0 +1,32 @@
+@import '../../scss/variables.scss';
+
+.Modal{
+    width: 40vw;
+    height: 40vh;
+    border-radius: 20px;
+    border: none;
+    &::backdrop{
+        background-color: rgba(19, 18, 18, 0.801);
+    }
+    &[open]{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+
+        .modal--header{
+            width: 85%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 485px;
+            h2{
+                @include font(700, 2.5rem)
+            }
+        }
+    }
+
+}
+

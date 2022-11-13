@@ -1,0 +1,21 @@
+@import '../../scss/variables.scss';
+
+.button{
+    width: 20vw;
+    text-align: center;
+    height: 10.70vh;
+    @include font(600, 3.6rem);
+    padding: 0 40px;
+    margin: 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(14, 14, 14);
+    color: white;
+    cursor: pointer;
+    transition: all .3s ease-out;
+    
+    &:hover{
+        background-color: rgb(48, 44, 44);
+        box-shadow: 5px 5px 0px 0px rgb(0, 0, 0);
+    }
+}

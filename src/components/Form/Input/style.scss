@@ -1,0 +1,12 @@
+@import '../../../scss/variables.scss';
+
+input{
+    width: 80%;
+    line-height: 50px;
+    @include font(400, 3rem);
+    padding: 0 10px;
+    outline: none;
+    border: 2px solid black;
+    max-width: 485px;
+    border-radius: 10px;
+}

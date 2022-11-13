@@ -1,10 +1,11 @@
-import { Button } from "../Button";
+import { forwardRef } from "react";
 
-export function Modal({children}){
-    const modal = document.querySelector('dialog');
+import './style.scss'
+
+export const Modal = forwardRef(({children}, ref) => {
     return(
-        <dialog>
+        <dialog ref={ref} className="Modal">
             {children}
         </dialog>
     )
-}
+})
