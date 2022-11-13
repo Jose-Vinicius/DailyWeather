@@ -11,7 +11,7 @@ import { getGeolocation } from "../../services/get.geolocation.service";
 
 export function DesktopView(){
     const searchRef = useRef()
-    const {locate, setLocate, geolocation, setGeolocation, setForecast, setDate, forecast, date, setPrecipitation, precipitation} = useContext(AppContext);
+    const {locate, setLocate, geolocation, setGeolocation, setForecast, forecast, dailyPrecipitation, setDailyPrecipitation} = useContext(AppContext);
     const {transformDate} = useAppContext()
 
     function openModal(){
@@ -71,7 +71,7 @@ export function DesktopView(){
             forecast.daily.precipitation_sum.map((precipitationSum) => {
                 precipitationArray.push(precipitationSum);
             })
-            setDate(() => transformDate(dateArray, precipitationArray));
+            setDailyPrecipitation(() => transformDate(dateArray, precipitationArray));
         }
     },[forecast])
     
@@ -92,7 +92,7 @@ export function DesktopView(){
                 <Button clickEvent={openModal}>Buscar</Button>
             </div>
             <div className="card--info">
-                {date ? date.map((date) => {
+                {dailyPrecipitation ? dailyPrecipitation.map((date) => {
                     return <Card data={date.date} precipitation={date.precipitation} key={date.id}/>
                 }): ''}
             </div>

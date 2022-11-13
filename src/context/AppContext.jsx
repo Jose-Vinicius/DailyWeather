@@ -8,8 +8,7 @@ export const AppProvider = ({children}) => {
     const [locate, setLocate] = useState('')
     const [geolocation, setGeolocation] = useState('');
     const [forecast, setForecast] = useState('');
-    const [date, setDate] = useState('');
-    const [precipitation, setPrecipitation] = useState('');
+    const [dailyPrecipitation, setDailyPrecipitation] = useState('')
 
     return(
         <AppContext.Provider
@@ -17,8 +16,7 @@ export const AppProvider = ({children}) => {
                 geolocation, setGeolocation,
                 forecast, setForecast,
                 locate, setLocate,
-                date, setDate,
-                precipitation, setPrecipitation
+                dailyPrecipitation, setDailyPrecipitation
             }}
         >
             {children}
@@ -49,7 +47,6 @@ export const useAppContext = () => {
                 precipitation: precipitationTransform[i]
             }
           }
-        console.log(mergedDataArray)
         return mergedDataArray
     }
 
