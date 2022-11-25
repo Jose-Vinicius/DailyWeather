@@ -6,7 +6,7 @@ export function Card({data, precipitation, handleClass, id}) {
   return (
     <div className={`card--select`} onClick={handleClass} id={id}>
       <h1>{data}</h1>
-      <img src="/weather__icons/sunny.svg" alt="" />
+      <img src="/weatherIcons/sunny.svg" alt="" />
       <span>{precipitation} mm</span>
     </div>
   )
