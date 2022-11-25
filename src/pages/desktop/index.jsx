@@ -2,20 +2,34 @@ import {useContext, useEffect, useRef} from "react";
 
 import { Button } from "../../components/Button";
 import { Card } from "../../components/Card";
+import { Date } from "../../components/Date";
 import { Input } from "../../components/Form/Input";
 import { Locate } from "../../components/Locate";
 import { Modal } from "../../components/Modal";
 import { AppContext, useAppContext } from "../../context/AppContext";
 import { getForecast } from "../../services/get.forecast.service";
-import { getGeolocation } from "../../services/get.geolocation.service";
+import { getGeolocation} from "../../services/get.geolocation.service";
 
 export function DesktopView(){
     const searchRef = useRef()
-    const {locate, setLocate, geolocation, setGeolocation, setForecast, forecast, dailyPrecipitation, setDailyPrecipitation} = useContext(AppContext);
-    const {transformDate} = useAppContext()
+    const {
+        locate, setLocate, 
+        geolocation, setGeolocation, 
+        forecast, setForecast, 
+        dailyPrecipitation, setDailyPrecipitation,
+        infoDay, setInfoDay
+    } = useContext(AppContext);
+    const {transformDate, onLoadError, onLoadSucess} = useAppContext()
 
     function openModal(){
         searchRef.current.showModal();
+    }
+
+    function setSelect(e){
+        if(dailyPrecipitation){
+            let id = e.currentTarget.id
+            setInfoDay(() => dailyPrecipitation[id])
+        }
     }
 
     function closeModal(){
@@ -31,7 +45,8 @@ export function DesktopView(){
     }
 
     function handleGetForecast(){
-        getForecast(geolocation.latitude, geolocation.longitude).then(forecast => {
+        console.log(geolocation)
+        getForecast(geolocation.lat, geolocation.lon).then(forecast => {
             setForecast(forecast)
             closeModal()
         })
@@ -47,33 +62,38 @@ export function DesktopView(){
         fontSize: '2.5rem',
         margin: '10px 0 20px 0',
         backgroundColor:'transparent',
-        padding:'0 10px 0 0'
+        padding:'0 10px 0 0',
     }
 
     const styleSearchButton = {
         fontSize: '2.5rem',
         margin: '40px 0',
     }
-
+    //Este useEffect pega os dados de uma API de geolocalização e manda para uma API de meteorologia.
     useEffect(() => {
         if(geolocation){
             handleGetForecast()
         }
     },[geolocation])
 
+    //Este useEffect pega duas fontes de dados e transforma em um objeto
     useEffect(() => {
         if(forecast !== ''){
-            let dateArray = [];
-            forecast.daily.time.map((day) => {
-                dateArray.push(day)
-            })
-            let precipitationArray = []
-            forecast.daily.precipitation_sum.map((precipitationSum) => {
-                precipitationArray.push(precipitationSum);
-            })
-            setDailyPrecipitation(() => transformDate(dateArray, precipitationArray));
+            let dateArray = forecast.daily.time;
+            let precipitationArray = forecast.daily.precipitation_sum;
+            let maxTemperatureArray = forecast.daily.temperature_2m_max;
+            let minTemperatureArray = forecast.daily.temperature_2m_min;
+            setDailyPrecipitation(() => transformDate(dateArray, precipitationArray, maxTemperatureArray, minTemperatureArray));
         }
     },[forecast])
+
+    useEffect(() => {
+        setInfoDay(() => dailyPrecipitation[0])
+    },[dailyPrecipitation])
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(onLoadSucess, onLoadError)
+    },[])
     
     return(
         <>
@@ -83,7 +103,7 @@ export function DesktopView(){
                     <Button clickEvent={closeModal} buttonStyle={styleCloseButton}>X</Button>
                 </div>
                 <form onSubmit={handleGetLocate}>
-                    <Input />
+                    <Input inputValue={locate} handleChange={(event) => setLocate(event.target.value)}/>
                     <Button buttonStyle={styleSearchButton}>Buscar Cidade</Button>
                 </form>
             </Modal>
@@ -91,9 +111,12 @@ export function DesktopView(){
                 <Locate />
                 <Button clickEvent={openModal}>Buscar</Button>
             </div>
+            <div className="date">
+                {infoDay ? <Date date={infoDay.date} week={infoDay.weekDay}/> : ''}
+            </div>
             <div className="card--info">
                 {dailyPrecipitation ? dailyPrecipitation.map((date) => {
-                    return <Card data={date.date} precipitation={date.precipitation} key={date.id}/>
+                    return <Card id={date.id} data={date.weekDay} precipitation={date.precipitation} key={date.id} handleClass={setSelect}/>
                 }): ''}
             </div>
         </>

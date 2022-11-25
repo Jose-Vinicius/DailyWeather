@@ -1,10 +1,7 @@
-import { useContext } from 'react'
-import { AppContext } from '../../../context/AppContext'
 import './style.scss'
 
-export function Input(){
-    const {locate, setLocate} = useContext(AppContext);
+export function Input({inputValue, handleChange}){
     return(
-        <input type="text" value={locate} onChange={(event) => setLocate(event.target.value)}/>
+        <input type="text" value={inputValue} onChange={handleChange}/>
     )
 }

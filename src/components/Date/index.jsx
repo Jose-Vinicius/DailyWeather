@@ -1,14 +1,13 @@
 import React from "react";
 import './style.scss';
 
-export function Date({date}){
-    const day = date.day;
-    const mounth = date.mounth;
-    const year = date.year;
+export function Date({date, week}){
     return(
-        <div className="date--field">
-            <p>Quarta Feira</p>
-            <span>{day}/{mounth}/{year}</span>
-        </div>
+        <>
+           {date ? <div className="date--field">
+                <span>{week}</span>
+                <span>{date}</span>
+            </div> : ''}
+        </>
     )
 }

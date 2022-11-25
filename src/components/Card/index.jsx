@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AppContext } from '../../context/AppContext'
 import './style.scss'
 
-export function Card({data, precipitation}) {
-
+export function Card({data, precipitation, handleClass, id}) {
   return (
-    <div className='card--select off'>
+    <div className={`card--select`} onClick={handleClass} id={id}>
       <h1>{data}</h1>
       <img src="/weather__icons/sunny.svg" alt="" />
-      <span>{precipitation}</span>
+      <span>{precipitation} mm</span>
     </div>
   )
 }

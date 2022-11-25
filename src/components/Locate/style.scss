@@ -4,20 +4,48 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    span{
-        @include font(600,5.8em);
-        color:white;
-    }
     p{
-        @include font(300, 4.6em);
+        @include font(300, 4em);
         color: white;
         padding: 15px 0 0 15px;
     }
+    &--temperature{
+        display: flex;
+
+        div:first-child{
+            display: flex;
+            flex-direction: row;
+            p{
+                @include font(600,4em);
+                color:rgba(245, 0, 0, 0.8);
+                align-self: flex-end;
+            }
+            h2{
+                @include font(600, 5.5em);
+                color: white;
+                padding: 15px 0 0 15px;
+            }
+        }
+        div:last-child{
+            display: flex;
+            flex-direction: row;
+            p{
+                @include font(600,4em);
+                color:rgb(4, 113, 255, 0.8);
+                align-self: flex-end;
+            }
+            h2{
+                @include font(600, 5.5em);
+                color: white;
+                padding: 15px 0 0 15px;
+            }
+        }
+    }
    &--field{
         display: flex;
-        width: 800px;
+        width: 80vw;
         justify-content: space-between;
-        margin: 20px 40px;
+        margin: 10px 10px 0 40px;
     
         button{
             font-size: 3.5em;

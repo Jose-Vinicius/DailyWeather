@@ -16,19 +16,20 @@
             margin: 25px 0;
         }
         border-radius: 20px;
-        &.off{
+        &.false{
             border: 2px solid rgba(255, 255, 255, 0.4);
         }
-        &.on{
+        &.true{
             border: 5px solid rgba(0, 0, 0, 1);
         }
     }
     &--info{
-        height: 75vh;
+        width: 95vw;
         display: flex;
         flex-direction: row;
         align-items: flex-end;
         justify-content: space-between;
-        margin: 0 50px;
+        margin: 25vh 5vh 0;
+        text-align: center;
     }
 }
