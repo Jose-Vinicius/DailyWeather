@@ -1,14 +1,29 @@
 @import '../../scss/variables.scss';
 .card{
+    &--info{
+        width: 95vw;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin: 15vh 5vh 0 ;
+        text-align: center;
+    }
     &--select{
-        width: 252px;
-        height: 325px;
+        width: 240px;
+        min-width: 200px;
+        height: 280px;
+        min-height: 260px;
         background-image: linear-gradient(to bottom right, rgba(62, 62, 62, 0.82), rgba(255, 255, 255, 0.15));
         @include font(600, 3.6rem);
         backdrop-filter: blur(5px);
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: pointer;
+        img{
+            width: 40%;
+        }
         h1{
             margin: 16px 0 18px 0;
         }
@@ -22,14 +37,5 @@
         &.true{
             border: 5px solid rgba(0, 0, 0, 1);
         }
-    }
-    &--info{
-        width: 95vw;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        justify-content: space-between;
-        margin: 25vh 5vh 0;
-        text-align: center;
     }
 }

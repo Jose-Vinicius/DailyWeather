@@ -11,7 +11,8 @@ import { getForecast } from "../../services/get.forecast.service";
 import { getGeolocation} from "../../services/get.geolocation.service";
 
 export function DesktopView(){
-    const searchRef = useRef()
+    const searchRef = useRef();
+    
     const {
         locate, setLocate, 
         geolocation, setGeolocation, 
@@ -27,8 +28,8 @@ export function DesktopView(){
 
     function setSelect(e){
         if(dailyPrecipitation){
-            let id = e.currentTarget.id
-            setInfoDay(() => dailyPrecipitation[id])
+            const currentItem = e.currentTarget
+            setInfoDay(() => dailyPrecipitation[currentItem.id])
         }
     }
 
@@ -45,7 +46,6 @@ export function DesktopView(){
     }
 
     function handleGetForecast(){
-        console.log(geolocation)
         getForecast(geolocation.lat, geolocation.lon).then(forecast => {
             setForecast(forecast)
             closeModal()
@@ -69,6 +69,7 @@ export function DesktopView(){
         fontSize: '2.5rem',
         margin: '40px 0',
     }
+
     //Este useEffect pega os dados de uma API de geolocalização e manda para uma API de meteorologia.
     useEffect(() => {
         if(geolocation){
@@ -116,7 +117,7 @@ export function DesktopView(){
             </div>
             <div className="card--info">
                 {dailyPrecipitation ? dailyPrecipitation.map((date) => {
-                    return <Card id={date.id} data={date.weekDay} precipitation={date.precipitation} key={date.id} handleClass={setSelect}/>
+                    return <Card id={date.id} data={date.weekDay} precipitation={date.precipitation} key={date.id} cardClass={infoDay && infoDay.id !== date.id ? false: true} handleClass={setSelect}/>
                 }): ''}
             </div>
         </>

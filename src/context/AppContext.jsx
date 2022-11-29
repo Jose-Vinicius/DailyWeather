@@ -32,8 +32,6 @@ export const useAppContext = () => {
         geolocation, setGeolocation,
         forecast,
         locate,
-        infoDay ,setInfoDay,
-        dailyPrecipitation
 
     } = useContext(AppContext)
 
@@ -101,7 +99,7 @@ export const useAppContext = () => {
                 weekDay: weekTranform[i],
                 precipitation: precipitationTransform[i],
                 maxTemperature: maxTemperatureTransform[i],
-                minTemperature: minTemperatureTransform[i]
+                minTemperature: minTemperatureTransform[i],
             }
           }
         return mergedDataArray
