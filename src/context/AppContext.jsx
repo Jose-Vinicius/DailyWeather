@@ -76,7 +76,7 @@ export const useAppContext = () => {
         return transformedArray
     }
 
-    function transformDate(arrayTime, precipitation, maxTemperature, minTemperature){
+    function transformDate(arrayTime, precipitation, maxTemperature, minTemperature, weatherCode){
         const timeMapTransform = arrayTime.slice(0,5).map((date) => {
             let dateArray =  moment(date).format('DD/MM/YYYY')
             return dateArray
@@ -90,6 +90,8 @@ export const useAppContext = () => {
 
         const weekTranform = transformWeek(sliceArrays(arrayTime));
 
+        const weatherCodeTransform = sliceArrays(weatherCode);
+
         let mergedDataArray = []
 
         for (let i = 0; i < timeMapTransform.length; i++){
@@ -100,6 +102,7 @@ export const useAppContext = () => {
                 precipitation: precipitationTransform[i],
                 maxTemperature: maxTemperatureTransform[i],
                 minTemperature: minTemperatureTransform[i],
+                weatherCode: weatherCodeTransform[i] 
             }
           }
         return mergedDataArray

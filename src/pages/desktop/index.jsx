@@ -84,7 +84,8 @@ export function DesktopView(){
             let precipitationArray = forecast.daily.precipitation_sum;
             let maxTemperatureArray = forecast.daily.temperature_2m_max;
             let minTemperatureArray = forecast.daily.temperature_2m_min;
-            setDailyPrecipitation(() => transformDate(dateArray, precipitationArray, maxTemperatureArray, minTemperatureArray));
+            let weatherCodeArray = forecast.daily.weathercode;
+            setDailyPrecipitation(() => transformDate(dateArray, precipitationArray, maxTemperatureArray, minTemperatureArray, weatherCodeArray));
         }
     },[forecast])
 
@@ -117,7 +118,14 @@ export function DesktopView(){
             </div>
             <div className="card--info">
                 {dailyPrecipitation ? dailyPrecipitation.map((date) => {
-                    return <Card id={date.id} data={date.weekDay} precipitation={date.precipitation} key={date.id} cardClass={infoDay && infoDay.id !== date.id ? false: true} handleClass={setSelect}/>
+                    return <Card 
+                    id={date.id} 
+                    data={date.weekDay} 
+                    precipitation={date.precipitation} 
+                    key={date.id}
+                    weatherCondition={date.weatherCode} 
+                    cardClass={infoDay && infoDay.id !== date.id ? false: true} 
+                    handleClass={setSelect}/>
                 }): ''}
             </div>
         </>
